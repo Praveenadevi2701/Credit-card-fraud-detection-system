@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Credit Card Fraud Detection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="top">
+  <h1>Credit Card Fraud Detection</h1>
+  <p>Every transaction is scored before it clears. Limit breaches and risky patterns get held or blocked.</p>
+</header>
+
+<main>
+  <section class="stats" id="stats"></section>
+
+  <section class="panel check">
+    <h2>Check a transaction</h2>
+    <div class="grid">
+      <label>Card <select id="card"></select></label>
+      <label>Amount (₹) <input id="amount" type="number" min="1" placeholder="e.g. 12000"></label>
+      <label>Merchant <input id="merchant" placeholder="e.g. Amazon"></label>
+      <label>Category
+        <select id="category">
+          <option value="groceries">Groceries</option><option value="dining">Dining</option>
+          <option value="travel">Travel</option><option value="fuel">Fuel</option>
+          <option value="electronics">Electronics</option><option value="jewelry">Jewelry</option>
+          <option value="gift_cards">Gift cards</option><option value="gambling">Gambling</option>
+          <option value="crypto">Crypto</option><option value="wire_transfer">Wire transfer</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label>Country (2 letters) <input id="country" value="IN" maxlength="2"></label>
+      <button id="run" class="primary">Check transaction</button>
+    </div>
+    <div id="result" class="result" hidden></div>
+  </section>
+
+  <section class="panel">
+    <div class="row"><h2>Cards and limits</h2><button id="toggleAdd" class="ghost">Add card</button></div>
+    <div id="addCard" class="grid add" hidden>
+      <label>Holder <input id="n_holder"></label>
+      <label>Last 4 digits <input id="n_last4" maxlength="4"></label>
+      <label>Home country <input id="n_country" value="IN" maxlength="2"></label>
+      <label>Per-transaction limit <input id="n_txn" type="number"></label>
+      <label>Daily limit <input id="n_daily" type="number"></label>
+      <button id="saveCard" class="primary">Save card</button>
+    </div>
+    <div id="cards" class="cards"></div>
+  </section>
+
+  <section class="panel">
+    <div class="row">
+      <h2>Transaction history</h2>
+      <div class="tools">
+        <select id="filter"><option value="">All</option><option>APPROVED</option><option>REVIEW</option><option>BLOCKED</option></select>
+        <a class="ghost" href="/api/export.csv">Export CSV</a>
+        <button id="reset" class="ghost danger">Reset demo</button>
+      </div>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>Time</th><th>Card</th><th>Merchant</th><th>Amount</th><th>Risk</th><th>Status</th><th>Why</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+</main>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

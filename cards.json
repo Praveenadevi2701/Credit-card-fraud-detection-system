@@ -1,0 +1,20 @@
+[
+  {
+    "id": "c1",
+    "holder": "Sami K",
+    "last4": "4821",
+    "home_country": "IN",
+    "txn_limit": 25000,
+    "daily_limit": 60000,
+    "frozen": false
+  },
+  {
+    "id": "c2",
+    "holder": "Ananya R",
+    "last4": "9033",
+    "home_country": "IN",
+    "txn_limit": 50000,
+    "daily_limit": 100000,
+    "frozen": false
+  }
+]
